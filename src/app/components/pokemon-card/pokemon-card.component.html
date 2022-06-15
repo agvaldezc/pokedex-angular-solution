@@ -1,0 +1,38 @@
+<div class="pokemon-card">
+  <ng-container *ngIf="pokemon" >
+    <h3>{{ pokemon.name | titlecase }}</h3>
+    <img
+      loading="lazy"
+      class="pokemon-sprite"
+      [src]="pokemon.sprites.front_default"
+      [alt]="pokemon.name"
+    />
+    <section class="pokemon-data">
+      <details>
+        <summary>ID</summary>
+        <p>{{ pokemon.id }}</p>
+      </details>
+      <details>
+        <summary>Types</summary>
+        <a *ngFor="let entry of pokemon.types" [href]="entry.type.url">{{
+          entry.type.name
+        }}</a>
+      </details>
+      <details>
+        <summary>Abilities</summary>
+        <a *ngFor="let entry of pokemon.abilities" [href]="entry.ability.url">{{
+          entry.ability.name
+        }}</a>
+      </details>
+      <details>
+        <summary>Moves</summary>
+        <a *ngFor="let entry of pokemon.moves" [href]="entry.move.url">{{
+          entry.move.name
+        }}</a>
+      </details>
+    </section>
+  </ng-container>
+  <ng-container>
+    <h3 class="pokemon-error">{{ error }}</h3>
+  </ng-container>
+</div>
