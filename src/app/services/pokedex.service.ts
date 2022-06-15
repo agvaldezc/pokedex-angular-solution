@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IPokemon } from '@interfaces/IPokemon';
+import { IPokemon } from '../interfaces/IPokemon';
 
 @Injectable()
 export class PokedexService {
