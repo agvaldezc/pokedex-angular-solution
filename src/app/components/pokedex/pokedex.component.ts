@@ -22,34 +22,22 @@ export class PokedexComponent implements OnInit {
   ) {
     this.search = this.formBuilder.control(
       { value: '', disabled: false },
-      Validators.compose([
-        Validators.required,
-      ])
+      Validators.compose([Validators.required])
     );
   }
 
   ngOnInit() {}
 
   searchPokemon(): void {
-    this.pokedexService
-      .getPokemon(this.search.value)
-      .pipe(
-        map((pokemon) => ({
-          id: pokemon.id,
-          name: pokemon.name,
-          abilities: pokemon.abilities,
-          sprites: pokemon.sprites,
-          moves: pokemon.moves,
-          types: pokemon.types,
-        }))
-      )
-      .subscribe((pokemon) => {
+    this.pokedexService.getPokemon(this.search.value).subscribe({
+      next: (pokemon) => {
         this.pokemon = pokemon;
         this.error = null;
       },
-      (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
         this.pokemon = null;
         this.error = error.message;
-      });
+      },
+    });
   }
 }
